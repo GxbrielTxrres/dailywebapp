@@ -6,7 +6,6 @@ const Weather = (props) => {
   return (
     <>
       <div className="text-center">
-        {console.log(props)}
         <h2>{date}</h2>
         <h1>
           {props.city}, {props.state}

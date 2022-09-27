@@ -1,12 +1,11 @@
 import { loadImage } from "../lib/NasaImg";
-import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import NasaButton from "../components/nasaButton";
 import Weather from "../components/weather";
 import { loadWeather } from "../lib/Weather";
+import Form from "../components/Form";
 
 export default function Home(props) {
-  console.log(props.weather);
   return (
     <div>
       <Head>
@@ -21,6 +20,7 @@ export default function Home(props) {
         desc={props.weather.data[0].weather.description}
       />
       <NasaButton imgUrl={props.data[0].hdurl} />
+      <Form />
     </div>
   );
 }
@@ -28,5 +28,6 @@ export default function Home(props) {
 export async function getStaticProps(context) {
   const data = await loadImage();
   const weather = await loadWeather();
+
   return { props: { data, weather } };
 }
