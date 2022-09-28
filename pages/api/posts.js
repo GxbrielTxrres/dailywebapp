@@ -12,7 +12,7 @@ export default function handler(req, res) {
       body: post,
     };
     posts.push(newPost);
-    console.log(posts);
+    console.log(req.body);
     res.status(201).json({ newPost });
   }
 }

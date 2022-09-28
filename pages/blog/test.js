@@ -1,19 +1,20 @@
 import { useState } from "react";
-import styles from "../../styles/Form.module.css";
+import styles from "../../styles/Home.module.css";
+
 export default function blogPosts() {
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState("");
   const [title, setTitle] = useState("");
 
   const fetchPosts = async () => {
-    const res = await fetch("/api/posts");
+    const res = await fetch("/api/blog");
     const data = await res.json();
     setPosts(data);
     console.log(posts);
   };
 
   const submitPost = async () => {
-    const response = await fetch("/api/posts", {
+    const response = await fetch("/api/blog", {
       method: "POST",
       body: JSON.stringify({ post, title }),
       headers: {
@@ -47,7 +48,7 @@ export default function blogPosts() {
         {posts.map((post) => {
           return (
             <div key={post.id}>
-              {post.body} {post.title}
+              {post.post} {post.title}
             </div>
           );
         })}
