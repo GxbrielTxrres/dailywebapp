@@ -1,28 +1,26 @@
 import { useState } from "react";
-import styles from "../../styles/Form.module.css";
-export default function blogPosts() {
-  const [posts, setPosts] = useState([]);
+import styles from "../../styles/Home.module.css";
+import clientPromise from "../../lib/mongodb";
+
+export default function blogPosts({ posts }) {
+  const [Posts, setPosts] = useState(posts);
   const [post, setPost] = useState("");
   const [title, setTitle] = useState("");
 
-  const fetchPosts = async () => {
-    const res = await fetch("/api/posts");
-    const data = await res.json();
-    setPosts(data);
-    console.log(posts);
-  };
-
   const submitPost = async () => {
-    const response = await fetch("/api/posts", {
+    const res = await fetch("/api/blog", {
       method: "POST",
-      body: JSON.stringify({ post, title }),
+      body: JSON.stringify({ title, post }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
-    fetchPosts();
-    console.log(data);
+    let data = await res.json();
+    posts.unshift(data);
+    setPosts([...posts]);
+    setTitle("");
+    setPost("");
+    console.log(posts);
   };
 
   return (
@@ -43,16 +41,37 @@ export default function blogPosts() {
           rows="10"
           cols="30"
         ></textarea>
-        <button onClick={fetchPosts}>Fetch</button>
-        {posts.map((post) => {
+
+        <button onClick={submitPost}>Submit</button>
+        {Posts.map((post) => {
           return (
-            <div key={post.id}>
-              {post.body} {post.title}
+            <div key={post._id}>
+              <h1>{post.title}</h1>
+              <p>{post.post}</p>
             </div>
           );
         })}
-        <button onClick={submitPost}>Submit</button>
       </div>
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  try {
+    const client = await clientPromise;
+    const db = await client.db("projects");
+
+    const posts = await db
+      .collection("posts")
+      .find({})
+      .limit(50)
+      .sort({ _id: -1 })
+      .toArray();
+
+    return {
+      props: { posts: JSON.parse(JSON.stringify(posts)) },
+    };
+  } catch (e) {
+    console.error(e);
+  }
+};

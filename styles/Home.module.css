@@ -1,13 +1,68 @@
-div.container {
+.backgroundImage {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.weather {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  margin-top: 5px;
+  margin-inline: auto;
+  height: fit-content;
+  width: fit-content;
+  padding: 0px 50px;
+  border-radius: 10px;
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 120%);
+  opacity: 80%;
+}
+
+.notesBtn {
   position: absolute;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-
-  width: 80%;
+  color: black;
+  font-size: 36px;
+  background-color: white;
+  opacity: 80%;
+  outline: unset;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .nasa {
-  width: 100%;
-  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.quote {
+  width: 90%;
+  padding: 15px 5px;
+  color: black;
+  border-radius: 10px;
+  opacity: 70%;
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 120%);
+  grid-area: 3;
+}
+
+.grid {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1.4fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 0px;
 }

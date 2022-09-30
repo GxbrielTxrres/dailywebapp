@@ -1,15 +1,13 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-
 const Weather = (props) => {
   let date = new Date().toString().slice(0, 15);
 
   return (
     <>
-      <div className="text-center">
-        <h2>{date}</h2>
-        <h1>
+      <div>
+        <h1>{date}</h1>
+        <p>
           {props.city}, {props.state}
-        </h1>
+        </p>
         <p>{props.temp}°F</p>
         <p>Currently: {props.desc}</p>
       </div>

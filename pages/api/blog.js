@@ -1,27 +1,22 @@
 import clientPromise from "../../lib/mongodb";
 
 export default async (req, res) => {
-  try {
-    if (req.method === "POST") {
-      const data = req.body;
+  if (req.method === "POST") {
+    let data = {
+      title: req.body.title,
+      post: req.body.post,
+    };
 
-      const client = await clientPromise;
-
-      const db = client.db("projects");
-
-      const posts = await db.collection("posts");
-
-      posts.insertOne(data);
-
-      res.json(posts);
-    }
     const client = await clientPromise;
 
-    const db = client.db("projects");
+    const db = await client.db("projects");
 
-    const post = await db.collection("posts").find({}).limit(20).toArray();
-    res.json(post);
-  } catch (e) {
-    console.error(e);
+    let posts = await db.collection("posts");
+
+    posts.insertOne(data);
+
+    posts = await db.collection("posts").find({}).sort({ _id: -1 }).toArray();
+    console.log(posts);
+    res.status(201).json(data);
   }
 };
