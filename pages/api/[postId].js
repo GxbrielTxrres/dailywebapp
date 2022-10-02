@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import clientPromise from "../../lib/mongodb";
 
-export default async (req, res) => {
+const postId = async (req, res) => {
   const { postId } = req.query;
 
   const client = await clientPromise;
@@ -19,14 +19,10 @@ export default async (req, res) => {
 
     return res.status(200).json(posts);
   }
+
   posts = await db.collection("posts").find({}).toArray();
-
-  posts = posts.map((post) => {
-    return JSON.parse(JSON.stringify(post));
-  });
-
-  url = await db.collection("posts").find({ _id: ObjectId(postId) });
-  console.log(url);
 
   return res.status(200).json(posts);
 };
+
+export default postId;

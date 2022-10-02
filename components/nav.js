@@ -1,14 +1,13 @@
 import Link from "next/link";
+import styles from "../styles/Home.module.css";
 const Nav = () => {
-  if (1 > 0) {
-    return (
-      <>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </>
-    );
-  }
+  return (
+    <>
+      <Link href="/">
+        <button className={styles.homeBtn}>Home</button>
+      </Link>
+    </>
+  );
 };
 
 export default Nav;

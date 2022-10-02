@@ -1,8 +1,23 @@
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
+import Link from "next/link";
+import styles from "../../styles/Home.module.css";
 export function Post(props) {
-  console.log(props.post);
-  return <div>{props.post[0]._id}</div>;
+  return (
+    <>
+      <div className={styles.noteWrapper}>
+        <div className={styles.noteTitleContainer}>
+          <h1>{props.post[0].title}</h1>
+        </div>
+        <div className={styles.notePostContainer}>
+          <p>{props.post[0].post}</p>
+        </div>
+      </div>
+      <Link href="/blog/">
+        <button className={styles.homeBtn}>Back</button>
+      </Link>
+    </>
+  );
 }
 
 export const getStaticPaths = async () => {
@@ -25,7 +40,6 @@ export const getStaticPaths = async () => {
 
 // This also gets called at build time
 export async function getStaticProps({ params }) {
-  console.log(params);
   const client = await clientPromise;
 
   const db = await client.db("projects");

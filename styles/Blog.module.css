@@ -13,8 +13,8 @@
 
 .inputContainer {
   height: 300px;
-  width: 300px;
-  margin-top: 40px;
+  width: clamp(250px, 30%, 60%);
+  margin-top: 60px;
   display: flex;
   margin-inline: auto;
   flex-direction: column;
@@ -23,7 +23,15 @@
 
 .delete {
   position: relative;
+  margin-left: 20px;
   z-index: 5;
+}
+
+.x {
+  background-color: white;
+  color: black;
+  font-weight: bolder;
+  font-size: 2rem;
 }
 
 .btn {
@@ -48,9 +56,10 @@
   border-radius: 15px;
   padding: 5px 10px;
   margin: 20px 10px;
+  width: clamp(325px, 50%, 60%) !important;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 322px) {
   .post {
     margin: 20px auto;
     width: 80%;

@@ -2,7 +2,7 @@ import { loadImage } from "../lib/NasaImg";
 import { loadWeather } from "../lib/Weather";
 import { loadQuotes } from "../lib/quotes";
 import Head from "next/head";
-
+import Image from "next/image";
 import Weather from "../components/weather";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
@@ -27,29 +27,40 @@ export default function Home(props) {
         </div>
 
         <div className={styles.notesContainer}>
-          <img className={styles.nasa} src={props.data[0].hdurl} alt="" />
+          <Image
+            width={300}
+            height={300}
+            className={styles.nasa}
+            src={props.data[0].url}
+            alt=""
+          />
         </div>
 
         <div className={styles.quote}>
-          <p style={{ fontSize: 20, marginBottom: 10 }}>"{props.quote[0].q}"</p>
+          <p
+            className={styles.quoteSz}
+            style={{ fontSize: 24, marginBottom: 10 }}
+          >
+            {props.quote[0].q}
+          </p>
           <Link href="/blog/">
             <button>Notes</button>
           </Link>
         </div>
 
         <div className={styles.backgroundImage}>
-          <img src={props.data[1].hdurl} alt="" />
+          <Image width={300} height={300} src={props.data[1].url} alt="" />
         </div>
 
         <div className={styles.bottomBackgroundImage}>
-          <img src={props.data[2].hdurl} alt="" />
+          <Image width={300} height={300} src={props.data[2].url} alt="" />
         </div>
       </div>
     </div>
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const data = await loadImage();
   const weather = await loadWeather();
   const quote = await loadQuotes();

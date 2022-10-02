@@ -4,7 +4,8 @@ import clientPromise from "../../lib/mongodb";
 import { Canvas } from "@react-three/fiber";
 import { Stars, OrbitControls } from "@react-three/drei";
 import Link from "next/link";
-export default function blogPosts({ posts }) {
+import Nav from "../../components/nav";
+export default function BlogPosts({ posts }) {
   const [Posts, setPosts] = useState(posts);
   const [post, setPost] = useState("");
   const [title, setTitle] = useState("");
@@ -21,7 +22,7 @@ export default function blogPosts({ posts }) {
     setPosts(data);
   };
 
-  const submitPost = async () => {
+  const submitNote = async () => {
     const res = await fetch("/api/blog", {
       method: "POST",
       body: JSON.stringify({ title, post }),
@@ -41,6 +42,7 @@ export default function blogPosts({ posts }) {
   return (
     <>
       <div className={styles.div}>
+        <Nav />
         <div className={styles.inputContainer}>
           <label htmlFor="title">Title:</label>
           <input
@@ -59,7 +61,7 @@ export default function blogPosts({ posts }) {
             cols="30"
           ></textarea>
 
-          <button className={styles.btn} onClick={submitPost}>
+          <button className={styles.btn} onClick={submitNote}>
             Submit
           </button>
         </div>
@@ -75,11 +77,17 @@ export default function blogPosts({ posts }) {
         {Posts.map((post) => {
           return (
             <div id={post._id} key={post._id}>
-              <button onClick={() => deleteNote(post._id)}>X</button>
+              <div className={styles.delete}>
+                <button
+                  className={styles.x}
+                  onClick={() => deleteNote(post._id)}
+                >
+                  X
+                </button>
+              </div>
               <Link href={`/blog/${post._id}`}>
                 <div className={styles.post}>
                   <h1>{post.title}</h1>
-                  <h1>{post._id}</h1>
                   <p style={{ paddingLeft: 15 }} className={styles.shortPost}>
                     {post.post}
                   </p>

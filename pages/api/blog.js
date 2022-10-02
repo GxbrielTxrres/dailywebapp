@@ -1,7 +1,6 @@
-import { ObjectId } from "mongodb";
 import clientPromise from "../../lib/mongodb";
 
-export default async (req, res) => {
+const blog = async (req, res) => {
   if (req.method === "POST") {
     let data = {
       title: req.body.title,
@@ -15,11 +14,17 @@ export default async (req, res) => {
 
     let posts = await db.collection("posts");
 
-    posts.insertOne(data);
+    await posts.insertOne(data);
 
     posts = await db.collection("posts").find({}).sort({ _id: -1 }).toArray();
-    console.log("posted");
-    JSON.parse(JSON.stringify(posts));
-    res.status(201).json(posts);
+
+    posts = posts.map((post) => {
+      return JSON.parse(JSON.stringify(post));
+    });
+
+    console.log(posts);
+    res.status(200).json(posts);
   }
 };
+
+export default blog();

@@ -27,13 +27,6 @@
   opacity: 80%;
 }
 
-.notesContainer {
-  grid-area: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .nasa {
   height: 300px;
   width: 300px;
@@ -43,7 +36,7 @@
 
 .quote {
   height: min-content;
-  width: 90%;
+  width: clamp(300px, 50%, 70%);
   padding: 10px;
   color: black;
   border-radius: 10px;
@@ -75,6 +68,47 @@
   padding-bottom: 5px;
 }
 
+.homeBtn {
+  position: absolute;
+
+  top: 5px;
+  left: 5px;
+}
+
+.noteTitleContainer {
+  background-color: rgb(0, 0, 0);
+  border-radius: 10px 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.notePostContainer {
+  border-radius: 10px;
+  margin: 25px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.noteWrapper {
+  height: fit-content;
+  width: clamp(200px, 80%, 800px);
+  background: rgba(242, 242, 242, 0.45);
+  box-shadow: 2px 7px 20px 0 rgba(246, 246, 255, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 15px;
+  padding: 5px 10px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
 @media screen and (max-width: 376px) {
   .grid {
     grid-template-rows: 1fr 1.7fr 2fr;
@@ -95,5 +129,20 @@
   .nasa {
     height: 150px;
     width: 150px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .grid {
+    align-items: end;
+  }
+
+  .quoteSz {
+    font-size: 3rem !important;
+  }
+
+  .notesContainer {
+    position: relative;
+    top: 10%;
   }
 }
