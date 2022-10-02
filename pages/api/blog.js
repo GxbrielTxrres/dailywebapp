@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import clientPromise from "../../lib/mongodb";
 
 export default async (req, res) => {
@@ -5,6 +6,7 @@ export default async (req, res) => {
     let data = {
       title: req.body.title,
       post: req.body.post,
+      _id: req.body._id,
     };
 
     const client = await clientPromise;
@@ -16,7 +18,8 @@ export default async (req, res) => {
     posts.insertOne(data);
 
     posts = await db.collection("posts").find({}).sort({ _id: -1 }).toArray();
-    console.log(posts);
-    res.status(201).json(data);
+    console.log("posted");
+    JSON.parse(JSON.stringify(posts));
+    res.status(201).json(posts);
   }
 };

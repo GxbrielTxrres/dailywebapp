@@ -1,5 +1,7 @@
+import styles from "../styles/Home.module.css";
+
 const Weather = (props) => {
-  let date = new Date().toString().slice(0, 15);
+  let date = new Date().toString().slice(3, 15);
 
   return (
     <>
@@ -8,8 +10,8 @@ const Weather = (props) => {
         <p>
           {props.city}, {props.state}
         </p>
-        <p>{props.temp}°F</p>
-        <p>Currently: {props.desc}</p>
+        <p className={styles.tempNumber}>{props.temp}°F</p>
+        <p className={styles.currently}>Currently: {props.desc}</p>
       </div>
     </>
   );

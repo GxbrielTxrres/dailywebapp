@@ -16,17 +16,6 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-        <Link href="/blog/">
-          <button className={styles.notesBtn}>Notes</button>
-        </Link>
-        <img
-          className={styles.backgroundImage}
-          src={props.data[1].hdurl}
-          alt="Nasa Photo Of The Day"
-        />
-      </div>
-
       <div className={styles.grid}>
         <div className={styles.weather}>
           <Weather
@@ -37,13 +26,23 @@ export default function Home(props) {
           />
         </div>
 
-        <div className={styles.quote}>
-          <h1>Keep your life on track.</h1>
-          <p>{props.quote[0].q}</p>
+        <div className={styles.notesContainer}>
+          <img className={styles.nasa} src={props.data[0].hdurl} alt="" />
         </div>
 
-        <div className={styles.nasaContainer}>
-          <img className={styles.nasa} src={props.data[0].hdurl} alt="" />
+        <div className={styles.quote}>
+          <p style={{ fontSize: 20, marginBottom: 10 }}>"{props.quote[0].q}"</p>
+          <Link href="/blog/">
+            <button>Notes</button>
+          </Link>
+        </div>
+
+        <div className={styles.backgroundImage}>
+          <img src={props.data[1].hdurl} alt="" />
+        </div>
+
+        <div className={styles.bottomBackgroundImage}>
+          <img src={props.data[2].hdurl} alt="" />
         </div>
       </div>
     </div>

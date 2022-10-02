@@ -6,6 +6,12 @@
   width: 100vw;
 }
 
+.bottomBackgroundImage {
+  position: absolute;
+  bottom: 0;
+  z-index: -2;
+}
+
 .weather {
   color: black;
   display: flex;
@@ -21,34 +27,24 @@
   opacity: 80%;
 }
 
-.notesBtn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  color: black;
-  font-size: 36px;
-  background-color: white;
-  opacity: 80%;
-  outline: unset;
-  border-radius: 5px;
-  cursor: pointer;
+.notesContainer {
+  grid-area: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nasa {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
   height: 300px;
   width: 300px;
   border-radius: 50%;
-  z-index: -1;
+  z-index: 0;
 }
 
 .quote {
+  height: min-content;
   width: 90%;
-  padding: 15px 5px;
+  padding: 10px;
   color: black;
   border-radius: 10px;
   opacity: 70%;
@@ -62,7 +58,42 @@
   justify-items: center;
   text-align: center;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1.4fr 1fr;
+  grid-template-rows: 0.9fr 1fr 0.9fr;
   grid-column-gap: 1px;
   grid-row-gap: 0px;
+}
+
+.tempNumber {
+  font-size: 3rem;
+}
+
+.nasaContainer {
+  grid-area: 2;
+}
+
+.currently {
+  padding-bottom: 5px;
+}
+
+@media screen and (max-width: 376px) {
+  .grid {
+    grid-template-rows: 1fr 1.7fr 2fr;
+  }
+
+  .weather {
+    height: 125px;
+    max-height: 250px;
+    width: fit-content;
+    padding: 0px 25px;
+    margin: 10px;
+  }
+
+  .tempNumber {
+    font-size: 1.8rem;
+  }
+
+  .nasa {
+    height: 150px;
+    width: 150px;
+  }
 }

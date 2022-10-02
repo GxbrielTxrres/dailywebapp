@@ -1,11 +1,12 @@
-import Nav from "../components/nav";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, SpotLight, Stars } from "@react-three/drei";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
+    <>
       <Component {...pageProps} />
-    </div>
+    </>
   );
 }
 

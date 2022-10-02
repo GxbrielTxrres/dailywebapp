@@ -1,11 +1,25 @@
 import { useState } from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/Blog.module.css";
 import clientPromise from "../../lib/mongodb";
-
+import { Canvas } from "@react-three/fiber";
+import { Stars, OrbitControls } from "@react-three/drei";
+import Link from "next/link";
 export default function blogPosts({ posts }) {
   const [Posts, setPosts] = useState(posts);
   const [post, setPost] = useState("");
   const [title, setTitle] = useState("");
+
+  const deleteNote = async (postId) => {
+    console.log(postId);
+
+    const res = await fetch(`/api/${postId}`, {
+      method: "DELETE",
+    });
+
+    let data = await res.json();
+    console.log(data);
+    setPosts(data);
+  };
 
   const submitPost = async () => {
     const res = await fetch("/api/blog", {
@@ -15,39 +29,62 @@ export default function blogPosts({ posts }) {
         "Content-Type": "application/json",
       },
     });
+    console.log(posts);
     let data = await res.json();
-    posts.unshift(data);
-    setPosts([...posts]);
+    console.log(data);
+
+    setPosts(data);
     setTitle("");
     setPost("");
-    console.log(posts);
   };
 
   return (
     <>
       <div className={styles.div}>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          name="title"
-        />
-        <label htmlFor="post">Post</label>
-        <textarea
-          onChange={(e) => setPost(e.target.value)}
-          value={post}
-          name="post"
-          rows="10"
-          cols="30"
-        ></textarea>
+        <div className={styles.inputContainer}>
+          <label htmlFor="title">Title:</label>
+          <input
+            maxLength={20}
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+          />
+          <label htmlFor="post">Post:</label>
+          <textarea
+            onChange={(e) => setPost(e.target.value)}
+            value={post}
+            name="post"
+            rows="10"
+            cols="30"
+          ></textarea>
 
-        <button onClick={submitPost}>Submit</button>
+          <button className={styles.btn} onClick={submitPost}>
+            Submit
+          </button>
+        </div>
+        <div className={styles.canvas}>
+          <Canvas dpr={1}>
+            <OrbitControls />
+            <ambientLight />
+
+            <Stars />
+          </Canvas>
+        </div>
+
         {Posts.map((post) => {
           return (
-            <div key={post._id}>
-              <h1>{post.title}</h1>
-              <p>{post.post}</p>
+            <div id={post._id} key={post._id}>
+              <button onClick={() => deleteNote(post._id)}>X</button>
+              <Link href={`/blog/${post._id}`}>
+                <div className={styles.post}>
+                  <h1>{post.title}</h1>
+                  <h1>{post._id}</h1>
+                  <p style={{ paddingLeft: 15 }} className={styles.shortPost}>
+                    {post.post}
+                  </p>
+                </div>
+              </Link>
             </div>
           );
         })}
