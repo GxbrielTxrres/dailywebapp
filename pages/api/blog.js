@@ -1,6 +1,6 @@
 import clientPromise from "../../lib/mongodb";
 
-const blog = async (req, res) => {
+export default async (req, res) => {
   if (req.method === "POST") {
     let data = {
       title: req.body.title,
@@ -26,5 +26,3 @@ const blog = async (req, res) => {
     res.status(200).json(posts);
   }
 };
-
-export default blog();

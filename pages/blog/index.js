@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { Stars, OrbitControls } from "@react-three/drei";
 import Link from "next/link";
 import Nav from "../../components/nav";
+
 export default function BlogPosts({ posts }) {
   const [Posts, setPosts] = useState(posts);
   const [post, setPost] = useState("");

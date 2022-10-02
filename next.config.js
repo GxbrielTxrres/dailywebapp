@@ -5,6 +5,7 @@ const nextConfig = {
   images: {
     domains: ["apod.nasa.gov"],
   },
+  staticPageGenerationTimeout: 100,
 };
 
 module.exports = nextConfig;

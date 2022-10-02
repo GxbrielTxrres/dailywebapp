@@ -2,7 +2,12 @@ import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
-export function Post(props) {
+import { useRouter } from "next/router";
+const Post = (props) => {
+  const router = useRouter();
+  if (!router.isFallback && !props.post[0].title) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <div className={styles.noteWrapper}>
@@ -18,7 +23,7 @@ export function Post(props) {
       </Link>
     </>
   );
-}
+};
 
 export const getStaticPaths = async () => {
   const client = await clientPromise;
