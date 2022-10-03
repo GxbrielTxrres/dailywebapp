@@ -5,6 +5,7 @@ import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 const Post = (props) => {
   const router = useRouter();
+
   if (!router.isFallback && !props.post[0].title) {
     return <div>Loading...</div>;
   }
@@ -25,33 +26,34 @@ const Post = (props) => {
   );
 };
 
-export const getStaticPaths = async () => {
-  const client = await clientPromise;
+// export const getStaticPaths = async () => {
+//   const client = await clientPromise;
 
-  const db = await client.db("projects");
+//   const db = await client.db("projects");
 
-  let data = await db.collection("posts").find({}).toArray();
-  const paths = data.map((post) => {
-    JSON.parse(JSON.stringify(post));
-    return {
-      params: { id: post._id.toString() },
-    };
-  });
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   let data = await db.collection("posts").find({}).toArray();
+//   const paths = data.map((post) => {
+//     JSON.parse(JSON.stringify(post));
+//     return {
+//       params: { id: post._id.toString() },
+//     };
+//   });
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
 // This also gets called at build time
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(context) {
+  console.log(context.query);
   const client = await clientPromise;
 
   const db = await client.db("projects");
 
   let post = await db
     .collection("posts")
-    .find({ _id: ObjectId(params.id) })
+    .find({ _id: ObjectId(context.query) })
     .toArray();
 
   // Pass post data to the page via props
