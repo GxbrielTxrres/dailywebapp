@@ -102,7 +102,7 @@ export default function BlogPosts({ posts }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const client = await clientPromise;
     const db = await client.db("projects");

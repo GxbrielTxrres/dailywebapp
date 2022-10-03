@@ -61,7 +61,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await loadImage();
   const weather = await loadWeather();
   const quote = await loadQuotes();
