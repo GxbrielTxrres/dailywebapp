@@ -44,7 +44,7 @@ export const getStaticPaths = async () => {
 };
 
 // This also gets called at build time
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const client = await clientPromise;
 
   const db = await client.db("projects");
