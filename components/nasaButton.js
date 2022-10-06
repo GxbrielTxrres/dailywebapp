@@ -8,8 +8,21 @@ const NasaButton = (props) => {
           width={300}
           height={300}
           className={styles.nasa}
-          style={{ zIndex: -5 }}
           src={props.imgUrl}
+          alt=""
+        />
+        <Image
+          width={300}
+          height={300}
+          className={styles.nasa}
+          src={props.imgUrl2}
+          alt=""
+        />
+        <Image
+          width={300}
+          height={300}
+          className={styles.nasa}
+          src={props.imgUrl3}
           alt=""
         />
       </div>

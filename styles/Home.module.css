@@ -1,3 +1,10 @@
+.container {
+  width: clamp(400px, 50%, 800px);
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
 .backgroundImage {
   position: absolute;
   z-index: -1;
@@ -52,8 +59,8 @@
   text-align: center;
   grid-template-columns: 1fr;
   grid-template-rows: 0.9fr 1fr 0.9fr;
-  grid-column-gap: 1px;
-  grid-row-gap: 0px;
+  grid-row-gap: 100px;
+  margin-top: 50px;
 }
 
 .tempNumber {
@@ -111,7 +118,9 @@
 
 @media screen and (max-width: 376px) {
   .grid {
+    margin-top: 10px;
     grid-template-rows: 1fr 1.7fr 2fr;
+    grid-row-gap: 10px;
   }
 
   .weather {
