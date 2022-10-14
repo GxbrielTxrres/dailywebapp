@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styles from "../../styles/Blog.module.css";
 import clientPromise from "../../lib/mongodb";
-import { Canvas } from "@react-three/fiber";
-import { Stars, OrbitControls } from "@react-three/drei";
 import Link from "next/link";
 import Nav from "../../components/nav";
 
@@ -65,14 +63,6 @@ export default function BlogPosts({ posts }) {
           <button className={styles.btn} onClick={submitNote}>
             Submit
           </button>
-        </div>
-        <div className={styles.canvas}>
-          <Canvas dpr={1}>
-            <OrbitControls />
-            <ambientLight />
-
-            <Stars />
-          </Canvas>
         </div>
 
         {Posts.map((post) => {
